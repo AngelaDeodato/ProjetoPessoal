@@ -1,112 +1,76 @@
 package br.com.itau.mercadoLivre.model;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_produto")
 public class Produto {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
-	private String nome;
+	@OneToMany
+	private List<Caracteristicas> caracteristicas;
 	
-	@Min(0)
-	@Column(nullable= false)
-	private BigDecimal valor;//rever
 	
-	@Min(0)
-	@Column(nullable= false)
-	private String quantidade;//rever
-	
-	@Size(min = 3)
-	private HashMap<String, Integer> caracteristicas = new HashMap<>();
-	
-	@NotBlank
-	@Column(nullable = false)
+	private Long quantidade;
 	private String descricao;
+	private String categoria;
+	private LocalDateTime criadoEm;
+	private Long idUsuario;
 	
-	@ManyToOne
-	private Categoria categoria;
 	
-	@Column(nullable = false)
-	private LocalDateTime dataCriacao;
-	
-	@ManyToOne
-	private Usuario usuario;
+	@Deprecated
+	public Produto() {
+	}
 
-	public Produto() {}
-
-	public Produto(Long id, @NotBlank String nome, @Min(0) BigDecimal valor, @Min(0) String quantidade,
-			@Size(min = 3) HashMap<String, Integer> caracteristicas, @NotBlank String descricao, Categoria categoria,
-			LocalDateTime dataCriacao, Usuario usuario) {
-		this.id = id;
-		this.nome = nome;
-		this.valor = valor;
-		this.quantidade = quantidade;
+	public Produto(List<Caracteristicas> caracteristicas, Long quantidade, String descricao, String categoria,
+			LocalDateTime criadoEm, Long idUsuario) {
+		super();
 		this.caracteristicas = caracteristicas;
+		this.quantidade = quantidade;
 		this.descricao = descricao;
 		this.categoria = categoria;
-		this.dataCriacao = dataCriacao;
-		this.usuario = usuario;
+		this.criadoEm = criadoEm;
+		this.idUsuario = idUsuario;
 	}
+	
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public BigDecimal getValor() {
-		return valor;
-	}
-
-	public String getQuantidade() {
-		return quantidade;
-	}
-
-	public HashMap<String, Integer> getCaracteristicas() {
+	public List<Caracteristicas> getCaracteristicas() {
 		return caracteristicas;
+	}
+
+	public Long getQuantidade() {
+		return quantidade;
 	}
 
 	public String getDescricao() {
 		return descricao;
 	}
 
-	public Categoria getCategoria() {
+	public String getCategoria() {
 		return categoria;
 	}
 
-	public LocalDateTime getDataCriacao() {
-		return dataCriacao;
+	public LocalDateTime getCriadoEm() {
+		return criadoEm;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	
 }
