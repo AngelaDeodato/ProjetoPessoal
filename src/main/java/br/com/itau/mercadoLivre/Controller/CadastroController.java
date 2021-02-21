@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Controller;
+package br.com.itau.mercadoLivre.controller;
 
 import java.util.List;
 
@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.itau.mercadoLivre.Dto.UsuarioDto;
-import br.com.itau.mercadoLivre.Form.UsuarioForm;
-import br.com.itau.mercadoLivre.Model.Usuario;
-import br.com.itau.mercadoLivre.Repository.UsuarioRepository;
+import br.com.itau.mercadoLivre.dto.UsuarioDto;
+import br.com.itau.mercadoLivre.form.UsuarioForm;
+import br.com.itau.mercadoLivre.model.Usuario;
+import br.com.itau.mercadoLivre.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping ("/cadastrar")
 @CrossOrigin (origins = "*", allowedHeaders = "*")
-public class UsuarioController {
-
+public class CadastroController {
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	

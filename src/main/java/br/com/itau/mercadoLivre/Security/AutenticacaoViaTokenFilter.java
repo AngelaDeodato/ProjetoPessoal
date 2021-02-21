@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Security;
+package br.com.itau.mercadoLivre.security;
 
 import java.io.IOException;
 
@@ -11,8 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import br.com.itau.mercadoLivre.Model.Usuario;
-import br.com.itau.mercadoLivre.Repository.UsuarioRepository;
+import br.com.itau.mercadoLivre.model.Usuario;
+import br.com.itau.mercadoLivre.repository.UsuarioRepository;
 
 public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
 

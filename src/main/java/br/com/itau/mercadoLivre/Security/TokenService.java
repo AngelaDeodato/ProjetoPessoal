@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Security;
+package br.com.itau.mercadoLivre.security;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import br.com.itau.mercadoLivre.Model.Usuario;
+import br.com.itau.mercadoLivre.model.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -49,3 +49,4 @@ public class TokenService {
 	}
 	
 }
+

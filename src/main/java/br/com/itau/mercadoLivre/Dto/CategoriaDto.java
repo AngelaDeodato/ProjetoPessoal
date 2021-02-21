@@ -1,9 +1,9 @@
-package br.com.itau.mercadoLivre.Dto;
+package br.com.itau.mercadoLivre.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.itau.mercadoLivre.Model.Categoria;
+import br.com.itau.mercadoLivre.model.Categoria;
 
 public class CategoriaDto {
 
@@ -33,6 +33,4 @@ public class CategoriaDto {
 		return categorias.stream().map(CategoriaDto::new).collect(Collectors.toList());
 	}
 
-	
-	
 }

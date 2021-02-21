@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Dto;
+package br.com.itau.mercadoLivre.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import br.com.itau.mercadoLivre.Model.Caracteristica;
-import br.com.itau.mercadoLivre.Model.Produto;
+import br.com.itau.mercadoLivre.model.Caracteristica;
+import br.com.itau.mercadoLivre.model.Produto;
 
 public class ProdutoDto {
 

@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Controller;
+package br.com.itau.mercadoLivre.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,23 +16,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.itau.mercadoLivre.Dto.ProdutoDto;
-import br.com.itau.mercadoLivre.Form.ImagensForm;
-import br.com.itau.mercadoLivre.Form.ProdutoForm;
-import br.com.itau.mercadoLivre.Form.Uploader;
-import br.com.itau.mercadoLivre.Model.Produto;
-import br.com.itau.mercadoLivre.Model.Usuario;
-import br.com.itau.mercadoLivre.Repository.CategoriaRepository;
-import br.com.itau.mercadoLivre.Repository.ProdutoRepository;
+import br.com.itau.mercadoLivre.dto.DetalhesProdutoDto;
+import br.com.itau.mercadoLivre.dto.ProdutoDto;
+import br.com.itau.mercadoLivre.form.ImagensForm;
+import br.com.itau.mercadoLivre.form.OpiniaoForm;
+import br.com.itau.mercadoLivre.form.PerguntaForm;
+import br.com.itau.mercadoLivre.form.ProdutoForm;
+import br.com.itau.mercadoLivre.form.Uploader;
+import br.com.itau.mercadoLivre.model.Emails;
+import br.com.itau.mercadoLivre.model.Opiniao;
+import br.com.itau.mercadoLivre.model.Pergunta;
+import br.com.itau.mercadoLivre.model.Produto;
+import br.com.itau.mercadoLivre.model.Usuario;
+import br.com.itau.mercadoLivre.repository.CategoriaRepository;
+import br.com.itau.mercadoLivre.repository.OpiniaoRepository;
+import br.com.itau.mercadoLivre.repository.PerguntaRepository;
+import br.com.itau.mercadoLivre.repository.ProdutoRepository;
+
 
 @RestController
 @RequestMapping("/produtos")
 public class ProdutoController {
+
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private OpiniaoRepository opiniaoRepository;
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+	
+	@Autowired
+	private PerguntaRepository perguntaRepository;
+
+	@Autowired
+	private Emails emails;
 
 	@Autowired
 	private Uploader uploader;
@@ -61,10 +80,48 @@ public class ProdutoController {
 		}
 
 		if (produto.get().getUsuario().getId() != usuario.getId()) {
-			throw new ResponseStatusException(HttpStatus.FORBIDDEN,
-					"A imagem só pode ser cadastrada pelo seu usuário original!");
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "A imagem só pode ser cadastrada pelo seu usuário original!");
 		}
 		produto.get().associaImagens(links);
 		produtoRepository.save(produto.get());
+	}
+	
+	@PostMapping("/{id}/opiniao")
+	public void addOpiniao(@PathVariable Long id, @RequestBody @Valid OpiniaoForm opiniaoForm,  @AuthenticationPrincipal Usuario consumidor) {
+		
+		Optional<Produto> produto = produtoRepository.findById(id);
+		
+		if (produto.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID inexistente!");
+		}
+		
+		Opiniao opiniao = opiniaoForm.converter(produtoRepository, consumidor);
+		opiniaoRepository.save(opiniao);
+	}
+	
+	@PostMapping("/{id}/pergunta")
+	public void addPergunta(@PathVariable Long id, @RequestBody @Valid PerguntaForm perguntaForm, @AuthenticationPrincipal Usuario interessado) {
+
+		Optional<Produto> produto = produtoRepository.findById(id);
+		
+		if (produto.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID inexistente!");
+		}
+				
+		Pergunta pergunta = perguntaForm.converter(produtoRepository, interessado);
+		perguntaRepository.save(pergunta);	
+		emails.novaPergunta(pergunta);		
+	}
+	
+	@GetMapping("/{id}")
+	public DetalhesProdutoDto getDetailsProduto(@PathVariable Long id) {
+
+		Optional<Produto> produto = produtoRepository.findById(id);
+		
+		if (produto.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID inexistente!");
+		}
+		
+		return new DetalhesProdutoDto(produto.get());
 	}
 }

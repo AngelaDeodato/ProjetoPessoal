@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Model;
+package br.com.itau.mercadoLivre.model;
 
 import java.util.Optional;
 
@@ -8,13 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "tb_categoria")
 public class Categoria {
-
+	
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,5 +47,4 @@ public class Categoria {
 	public void setCategoriaMae(Optional<Categoria> categoriaMae) {
 		this.categoriaMae = categoriaMae.get();
 	}
-	
 }

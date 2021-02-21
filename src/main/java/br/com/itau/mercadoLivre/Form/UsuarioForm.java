@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Form;
+package br.com.itau.mercadoLivre.form;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -6,11 +6,11 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import br.com.itau.mercadoLivre.Model.Usuario;
-import br.com.itau.mercadoLivre.Validation.ValorUnico;
+import br.com.itau.mercadoLivre.model.Usuario;
+import br.com.itau.mercadoLivre.validation.ValorUnico;
 
 public class UsuarioForm {
-	
+
 	@NotNull(message = "o login não pode ser nulo")
 	@NotBlank(message = "o login não pode ser em branco")
 	@Email(message = "O login precisa ter o formato do email")

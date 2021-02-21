@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Validation;
+package br.com.itau.mercadoLivre.validation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -7,6 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
+
 
 @Documented
 @Constraint(validatedBy = {ValorUnicoValidator.class})
@@ -22,3 +23,4 @@ public @interface ValorUnico {
     Class<?> domainClass();
 	
 }
+

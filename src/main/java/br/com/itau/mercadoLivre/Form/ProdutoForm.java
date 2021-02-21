@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Form;
+package br.com.itau.mercadoLivre.form;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,13 +11,14 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 
-import br.com.itau.mercadoLivre.Model.Caracteristica;
-import br.com.itau.mercadoLivre.Model.Categoria;
-import br.com.itau.mercadoLivre.Model.Produto;
-import br.com.itau.mercadoLivre.Model.Usuario;
-import br.com.itau.mercadoLivre.Repository.CategoriaRepository;
+import br.com.itau.mercadoLivre.model.Caracteristica;
+import br.com.itau.mercadoLivre.model.Categoria;
+import br.com.itau.mercadoLivre.model.Produto;
+import br.com.itau.mercadoLivre.model.Usuario;
+import br.com.itau.mercadoLivre.repository.CategoriaRepository;
 
 public class ProdutoForm {
+	
 	@NotBlank(message = "o nome é obrigatório")
 	private String nome;
 
@@ -32,18 +33,18 @@ public class ProdutoForm {
 	@Size(min = 3, message = "o produto possui pelo menos três características")
 	@Valid
 	private List<Caracteristica> caracteristicas;
-
+	
 	@NotBlank(message = "a descrição é obrigatória")
 	@Size(max = 1000, message = "a descrição tem máximo de 1000 caracteres.")
 	private String descricao;
 
 	@NotNull(message = "a categoria é obrigatória")
 	private String nomeCategoria;
-
+		
 	public String getNome() {
 		return nome;
 	}
-
+	
 	public BigDecimal getValor() {
 		return valor;
 	}
@@ -67,7 +68,7 @@ public class ProdutoForm {
 	public Produto converter(CategoriaRepository categoriaRepository, Usuario usuario) {
 		Optional<Categoria> categoria = categoriaRepository.findByNome(nomeCategoria);
 
-		if (categoria.isEmpty()) {
+		if (categoria.isEmpty()) {		
 			throw new IllegalStateException("A categoria é obrigatória e deve ser cadastrada");
 		}
 		return new Produto(nome, valor, quantidade, caracteristicas, descricao, categoria.get(), usuario);

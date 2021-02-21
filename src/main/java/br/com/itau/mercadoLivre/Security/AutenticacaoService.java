@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Security;
+package br.com.itau.mercadoLivre.security;
 
 import java.util.Optional;
 
@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.com.itau.mercadoLivre.Model.Usuario;
-import br.com.itau.mercadoLivre.Repository.UsuarioRepository;
+import br.com.itau.mercadoLivre.model.Usuario;
+import br.com.itau.mercadoLivre.repository.UsuarioRepository;
 
 @Service 
 public class AutenticacaoService implements UserDetailsService {

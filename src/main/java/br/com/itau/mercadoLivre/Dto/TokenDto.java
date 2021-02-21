@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Dto;
+package br.com.itau.mercadoLivre.dto;
 
 public class TokenDto {
 	
@@ -7,7 +7,7 @@ public class TokenDto {
 
 	public TokenDto(String token, String tipo) {
 		this.token = token;
-		this.tipo = tipo;
+		this.tipo = tipo;		
 	}
 
 	public String getToken() {

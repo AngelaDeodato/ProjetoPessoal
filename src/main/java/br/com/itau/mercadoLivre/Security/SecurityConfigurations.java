@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Security;
+package br.com.itau.mercadoLivre.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.com.itau.mercadoLivre.Repository.UsuarioRepository;
+import br.com.itau.mercadoLivre.repository.UsuarioRepository;
 
 @EnableWebSecurity
 @Configuration
@@ -57,6 +57,5 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 	}
-
-
+		
 }

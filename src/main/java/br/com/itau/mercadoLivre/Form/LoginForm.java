@@ -1,9 +1,9 @@
-package br.com.itau.mercadoLivre.Form;
+package br.com.itau.mercadoLivre.form;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 public class LoginForm {
-
+	
 	private String login;
 	private String senha;
 	
@@ -26,5 +26,6 @@ public class LoginForm {
 	public UsernamePasswordAuthenticationToken converter() {
 		return new UsernamePasswordAuthenticationToken(login, senha);
 	}
+
 
 }

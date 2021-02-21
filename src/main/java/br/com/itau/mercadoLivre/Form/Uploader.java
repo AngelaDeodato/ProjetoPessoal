@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Form;
+package br.com.itau.mercadoLivre.form;
 
 import java.util.List;
 import java.util.stream.Collectors;

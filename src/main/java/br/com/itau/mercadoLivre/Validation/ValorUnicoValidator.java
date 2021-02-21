@@ -1,4 +1,4 @@
-package br.com.itau.mercadoLivre.Validation;
+package br.com.itau.mercadoLivre.validation;
 
 import java.util.List;
 
